@@ -37,8 +37,8 @@ export default async function New() {
             <form action={createPost}>
                 <div className="flex gap-4">
                     <Image
-                        src={user?.imageUrl}
-                        alt={user?.firstName}
+                        src={user?.imageUrl || ''}
+                        alt={user?.firstName || ''}
                         width={50}
                         height={50}
                         className="rounded-full"
