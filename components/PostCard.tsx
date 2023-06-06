@@ -1,6 +1,6 @@
 import { clerkClient, currentUser } from "@clerk/nextjs";
 import Image from "next/image";
-import { use } from "react";
+import Link from "next/link";
 
 type PostCardProps = {
     id: string;
@@ -27,7 +27,12 @@ export async function PostCard({ content, authorId }: PostCardProps) {
             </div>
             <div className="flex flex-col w-full">
                 <div>
-                    <p className="font-bold">{user?.firstName}</p>
+                    <Link
+                        href={`/u/${user?.username}`}
+                        className="font-bold"
+                    >
+                        {user?.firstName}
+                    </Link>
                     <p>{content}</p>
                 </div>
                 <div className="flex justify-end gap-4">
