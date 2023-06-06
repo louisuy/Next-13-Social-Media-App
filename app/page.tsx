@@ -4,7 +4,11 @@ import { PostCard } from '@/components/PostCard'
 import { SignedIn } from '@clerk/nextjs'
 
 function getPosts() {
-  return prisma.post.findMany()
+  return prisma.post.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
+  })
 }
 
 export default async function Home() {
