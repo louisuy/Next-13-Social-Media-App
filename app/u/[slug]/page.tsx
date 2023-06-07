@@ -1,6 +1,7 @@
 import { PostCard } from "@/components/PostCard";
 import { prisma } from "@/db";
 import { clerkClient, currentUser } from "@clerk/nextjs";
+import { redirect } from 'next/navigation';
 import Image from "next/image";
 import Link from "next/link";
 
@@ -29,34 +30,42 @@ export default async function Page({
     const current = await currentUser();
     const isCurrentUser = current?.id === user?.id;
 
-    return (
-        <div className="">
-            <div className="flex items-center">
-                <div className="pl-3">
-                    <Image
-                        src={user?.imageUrl}
-                        alt={user?.username || ''}
-                        width={50}
-                        height={50}
-                        className="rounded-full m-4"
-                    />
-                </div>
-                <div className="flex flex-col">
-                    <Link href={`/u/${user?.id}`} className="font-bold">{user?.firstName} {user?.lastName}</Link>
-                    <h2>@{user?.username}</h2>
-                </div>
-            </div>
 
-            {posts.map(post => (
-                <PostCard
-                    key={post.id}
-                    content={post.content}
-                    authorId={post.authorId}
-                    id={post.id}
-                    createdAt={post.createdAt}
-                // likes={post.likes}
-                />
-            ))}
-        </div>
-    );
+    if (user !== undefined) {
+        return (
+            <>
+                <div className="flex items-center">
+                    <div className="pl-3">
+                        <Image
+                            src={user?.imageUrl}
+                            alt={user?.username || ''}
+                            width={50}
+                            height={50}
+                            className="rounded-full m-4"
+                        />
+                    </div>
+                    <div className="flex flex-col">
+                        <Link href={`/u/${user?.id}`} className="font-bold">{user?.firstName} {user?.lastName}</Link>
+                        <h2>@{user?.username}</h2>
+                    </div>
+                </div>
+                {
+                    posts.map(post => (
+                        <PostCard
+                            key={post.id}
+                            content={post.content}
+                            authorId={post.authorId}
+                            id={post.id}
+                            createdAt={post.createdAt}
+                        // likes={post.likes}
+                        />
+                    ))
+                }
+
+            </>
+        );
+    } else {
+        redirect('/');
+    }
+
 }
