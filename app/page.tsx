@@ -29,6 +29,7 @@ export default async function Home() {
             authorId={post.authorId}
             id={post.id}
             createdAt={post.createdAt}
+            likes={post.likes}
           />
         ))}
       </div>
