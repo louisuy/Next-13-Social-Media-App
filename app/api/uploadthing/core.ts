@@ -3,68 +3,17 @@ import { createUploadthing, type FileRouter } from "uploadthing/next";
  
 const f = createUploadthing();
  
+// FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {
-    videoAndImage: f({
-      image: {
-        maxFileSize: "4MB",
-        maxFileCount: 4,
-      },
-      video: {
-        maxFileSize: "16MB",
-      },
-    })
-      .middleware(() => ({}))
-      .onUploadComplete((data) => {
-        console.log("upload completed", data);
-      }),
-  
-    withMdwr: f({
-      image: {
-        maxFileCount: 2,
-        maxFileSize: "1MB",
-      },
-    })
-      .middleware((req) => {
-        const h = req.headers.get("someProperty");
-  
-        if (!h) throw new Error("someProperty is required");
-  
-        return {
-          someProperty: h,
-          otherProperty: "hello" as const,
-        };
-      })
-      .onUploadComplete(({ metadata, file }) => {
-        console.log("uploaded with the following metadata:", metadata);
-        metadata.someProperty;
-        //       ^?
-        metadata.otherProperty;
-        //       ^?
-  
-        console.log("files successfully uploaded:", file);
-        file;
-        // ^?
-      }),
-  
-    withoutMdwr: f({
-      image: {
-        maxFileCount: 2,
-        maxFileSize: "16MB",
-      },
-    })
-      .middleware(() => {
-        return { testMetadata: "lol" };
-      })
-      .onUploadComplete(({ metadata, file }) => {
-        console.log("uploaded with the following metadata:", metadata);
-        metadata;
-        // ^?
-  
-        console.log("files successfully uploaded:", file);
-        file;
-        // ^?
-      }),
-  } satisfies FileRouter;
-  
-  export type OurFileRouter = typeof ourFileRouter;
-  
+  // Define as many FileRoutes as you like, each with a unique routeSlug
+  imageUploader: f({ image: { maxFileSize: "4MB" } })
+    // Set permissions and file types for this FileRoute
+    .onUploadComplete(async ({ file }) => {
+      // This code RUNS ON YOUR SERVER after upload
+    //   console.log("Upload complete for userId:", metadata.userId);
+ 
+      console.log("file url", file.url);
+    }),
+} satisfies FileRouter;
+ 
+export type OurFileRouter = typeof ourFileRouter;
