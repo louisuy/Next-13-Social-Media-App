@@ -7,9 +7,10 @@ type PostCardProps = {
     createdAt: Date;
     content: string;
     authorId: string;
+    likes: number;
 }
 
-export async function PostCard({ content, authorId }: PostCardProps) {
+export async function PostCard({ content, authorId, likes }: PostCardProps) {
     const user = await clerkClient.users.getUser(authorId);
     const current = await currentUser();
     return (
@@ -19,7 +20,7 @@ export async function PostCard({ content, authorId }: PostCardProps) {
             <div>
                 <Image
                     src={user?.imageUrl}
-                    alt={user?.firstName || ''}
+                    alt={user?.username || ''}
                     width={32}
                     height={32}
                     className="rounded-full"
@@ -28,7 +29,7 @@ export async function PostCard({ content, authorId }: PostCardProps) {
             <div className="flex flex-col w-full">
                 <div>
                     <Link
-                        href={`/u/${user?.username}`}
+                        href={`/u/${user?.id}`}
                         className="font-bold"
                     >
                         {user?.firstName}
@@ -39,6 +40,7 @@ export async function PostCard({ content, authorId }: PostCardProps) {
                     <button className=''>
                         &#129293;
                     </button>
+                    {/* <p className="text-black">{likes}</p> */}
                     {current?.id === authorId && (
                         <>
                             <button className=''>
@@ -51,6 +53,6 @@ export async function PostCard({ content, authorId }: PostCardProps) {
                     )}
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
