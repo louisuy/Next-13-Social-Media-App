@@ -2,7 +2,7 @@
 
 import { UploadButton, UploadDropzone } from "@uploadthing/react";
 
-// import type { OurFileRouter } from "@/app/api/uploadthing/core";
+import type { OurFileRouter } from "@/app/api/uploadthing/core";
 
 export default function Home() {
     return (
@@ -12,7 +12,7 @@ export default function Home() {
                     {`Upload a file using a button:`}
                 </span>
 
-                {/* <UploadButton<OurFileRouter>
+                <UploadButton<OurFileRouter>
                     endpoint="withoutMdwr"
                     onClientUploadComplete={(res) => {
                         // Do something with the response
@@ -22,13 +22,13 @@ export default function Home() {
                     onUploadError={(error: Error) => {
                         alert(`ERROR! ${error.message}`);
                     }}
-                /> */}
+                />
             </div>
             <div className="flex flex-col items-center justify-center gap-4">
                 <span className="text-center font-bold">
                     {`...or using a dropzone:`}
                 </span>
-                {/* <UploadDropzone<OurFileRouter>
+                <UploadDropzone<OurFileRouter>
                     endpoint="withoutMdwr"
                     onClientUploadComplete={(res) => {
                         // Do something with the response
@@ -38,7 +38,7 @@ export default function Home() {
                     onUploadError={(error: Error) => {
                         alert(`ERROR! ${error.message}`);
                     }}
-                /> */}
+                />
             </div>
         </div>
     );

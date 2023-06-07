@@ -3,6 +3,7 @@ import { prisma } from "@/db";
 import Link from "next/link";
 import Image from "next/image";
 import { currentUser } from '@clerk/nextjs';
+import Uploader from "@/components/Uploader";
 
 async function createPost(data: FormData) {
     "use server";
@@ -35,21 +36,24 @@ export default async function New() {
             className='bg-white/[0.1] rounded-lg p-4 shadow-md focus-within:shadow-xl m-4 transition duration-200'
         >
             <form action={createPost}>
-                <div className="flex gap-4">
-                    <Image
-                        src={user?.imageUrl || ''}
-                        alt={user?.firstName || ''}
-                        width={50}
-                        height={50}
-                        className="rounded-full"
-                    />
-                    <input type="hidden" name="user" value={user?.id} />
-                    <input
-                        type="text"
-                        name="content"
-                        className="w-full outline-none bg-white/[0] pb-3"
-                        placeholder={`What's on your mind, ${user?.firstName}?`}
-                    />
+                <div className="flex flex-col">
+                    <div className="flex gap-4">
+                        <Image
+                            src={user?.imageUrl || ''}
+                            alt={user?.firstName || ''}
+                            width={50}
+                            height={50}
+                            className="rounded-full"
+                        />
+                        <input type="hidden" name="user" value={user?.id} />
+                        <input
+                            type="text"
+                            name="content"
+                            className="w-full outline-none bg-white/[0] pb-3"
+                            placeholder={`What's on your mind, ${user?.firstName}?`}
+                        />
+                    </div>
+                    <Uploader />
                 </div>
 
                 <div className="items-center">
