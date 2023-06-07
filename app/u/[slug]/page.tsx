@@ -20,12 +20,15 @@ export default async function Page({
 }: {
     params: { slug: string };
 }) {
-    const user = await clerkClient.users.getUser(params.slug);
+    const userList = await clerkClient.users.getUserList({
+        limit: 1,
+        username: [`${params.slug}`]
+    })
+    const user = userList[0];
     const posts = await getPosts(user?.id || '');
     const current = await currentUser();
     const isCurrentUser = current?.id === user?.id;
-    // const feedTitle = isCurrentUser ? 'Your Feed' : `${user?.firstName}'s Feed`;
-    // console.log(params.slug);
+
     return (
         <div className="">
             <div className="flex items-center">
@@ -38,7 +41,6 @@ export default async function Page({
                         className="rounded-full m-4"
                     />
                 </div>
-                {/* <h1 className="font-bold">{feedTitle}</h1> */}
                 <div className="flex flex-col">
                     <Link href={`/u/${user?.id}`} className="font-bold">{user?.firstName} {user?.lastName}</Link>
                     <h2>@{user?.username}</h2>

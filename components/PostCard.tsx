@@ -29,7 +29,7 @@ export async function PostCard({ content, authorId, likes }: PostCardProps) {
             <div className="flex flex-col w-full">
                 <div>
                     <Link
-                        href={`/u/${user?.id}`}
+                        href={`/u/${user?.username}`}
                         className="font-bold"
                     >
                         {user?.firstName}
