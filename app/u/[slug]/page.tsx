@@ -54,7 +54,7 @@ export default async function Page({
                     authorId={post.authorId}
                     id={post.id}
                     createdAt={post.createdAt}
-                    likes={post.likes}
+                // likes={post.likes}
                 />
             ))}
         </div>

@@ -7,10 +7,10 @@ type PostCardProps = {
     createdAt: Date;
     content: string;
     authorId: string;
-    likes: number;
+    // likes: number;
 }
 
-export async function PostCard({ content, authorId, likes }: PostCardProps) {
+export async function PostCard({ content, authorId }: PostCardProps) {
     const user = await clerkClient.users.getUser(authorId);
     const current = await currentUser();
     return (
