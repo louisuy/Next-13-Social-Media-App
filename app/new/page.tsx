@@ -33,42 +33,61 @@ export default async function New() {
     // console.log(user)
     return (
         <div
-            className='bg-white/[0.1] rounded-lg p-4 shadow-md focus-within:shadow-xl m-4 transition duration-200'
+            className='rounded-xl m-4 border-2 border-[#353535]'
         >
             <form action={createPost}>
-                <div className="flex flex-col">
+                <div className="flex flex-col p-4 ">
                     <div className="flex gap-4">
-                        <Image
-                            src={user?.imageUrl || ''}
-                            alt={user?.firstName || ''}
-                            width={50}
-                            height={50}
-                            className="rounded-full"
-                        />
+
                         <input type="hidden" name="user" value={user?.id} />
                         <input
                             type="text"
                             name="content"
                             className="w-full outline-none bg-white/[0] pb-3"
                             placeholder={`What's on your mind, ${user?.firstName}?`}
+                            autoComplete="off"
                         />
                     </div>
-                    <Uploader />
+                    {/* <Uploader /> */}
                 </div>
 
-                <div className="items-center">
-                    <div className="flex gap-3 justify-end">
-                        <Link href='..'>
-                            <button className='btn w-min h-min'>
-                                Cancel
+                <div className="items-center bg-[#FEFEFE] border-t-2 border-[#353535] rounded-b-xl">
+                    <div className="flex justify-between p-4">
+                        <div className="flex items-center gap-4">
+                            <Image
+                                src={user?.imageUrl || ''}
+                                alt={user?.username || ''}
+                                width={32}
+                                height={32}
+                                className="rounded-full"
+                            />
+                            <div>
+                                <Link
+                                    href={`/u/${user?.username}`}
+                                    className="flex flex-col"
+                                >
+                                    <p className="font-bold -m-1">
+                                        {user?.firstName}
+                                    </p>
+                                    <p className="-m-1">
+                                        @{user?.username}
+                                    </p>
+                                </Link>
+                            </div>
+                        </div>
+                        <div className="flex gap-3">
+                            <Link href='..'>
+                                <button className="px-2 rounded-full border-2 border-[#353535] hover:text-[#FEFEFE] hover:bg-[#353535]">
+                                    Cancel
+                                </button>
+                            </Link>
+                            <button
+                                type="submit"
+                                className="px-2 rounded-full border-2 border-[#353535] text-[#FEFEFE] bg-[#353535] hover:bg-[#FEFEFE] hover:text-[#353535] h-min"
+                            >
+                                Post
                             </button>
-                        </Link>
-                        <button
-                            type="submit"
-                            className='btn btn-primary w-min h-min'
-                        >
-                            Post
-                        </button>
+                        </div>
                     </div >
                 </div>
             </form >

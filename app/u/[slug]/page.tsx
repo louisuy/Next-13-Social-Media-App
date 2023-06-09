@@ -34,19 +34,19 @@ export default async function Page({
     if (user !== undefined) {
         return (
             <>
-                <div className="flex items-center">
-                    <div className="pl-3">
-                        <Image
-                            src={user?.imageUrl}
-                            alt={user?.username || ''}
-                            width={50}
-                            height={50}
-                            className="rounded-full m-4"
-                        />
-                    </div>
+                <div className="flex gap-4 m-4">
+                    <Image
+                        src={user?.imageUrl}
+                        alt={user?.username || ''}
+                        width={50}
+                        height={50}
+                        className="rounded-full border-2 border-[#353535] bg-[#353535]"
+                    />
                     <div className="flex flex-col">
-                        <Link href={`/u/${user?.id}`} className="font-bold">{user?.firstName} {user?.lastName}</Link>
-                        <h2>@{user?.username}</h2>
+                        <Link href={`/u/${user?.id}`} className="font-bold text-xl">{user?.firstName} {user?.lastName}</Link>
+                        <div>
+                            <h2 className="-my-2">@{user?.username}</h2>
+                        </div>
                     </div>
                 </div>
                 {

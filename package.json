@@ -30,7 +30,6 @@
     "uploadthing": "^4.1.0"
   },
   "devDependencies": {
-    "daisyui": "^3.0.4",
     "prisma": "^4.15.0"
   }
 }
