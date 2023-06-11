@@ -43,7 +43,7 @@ export default async function Page({
                         className="rounded-full border-2 border-[#353535] bg-[#353535]"
                     />
                     <div className="flex flex-col">
-                        <Link href={`/u/${user?.id}`} className="font-bold text-xl">{user?.firstName} {user?.lastName}</Link>
+                        <Link href={`/u/${user?.username}`} className="font-bold text-xl">{user?.firstName} {user?.lastName}</Link>
                         <div>
                             <h2 className="-my-2">@{user?.username}</h2>
                         </div>
