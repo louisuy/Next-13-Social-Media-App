@@ -51,9 +51,11 @@ export async function PostCard({ content, authorId, id }: PostCardProps) {
                         {/* <p className="text-black">{likes}</p> */}
                         {current?.id === authorId && (
                             <>
-                                <button className=''>
-                                    &#128221;
-                                </button>
+                                <Link href={`/edit/${id}`}>
+                                    <button>
+                                        &#128221;
+                                    </button>
+                                </Link>
                                 <DeleteButton id={id} />
                             </>
                         )}
