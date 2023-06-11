@@ -13,12 +13,6 @@ function getPosts() {
 
 export default async function Home() {
   const posts = await getPosts()
-  // await prisma.post.create({
-  //   data: {
-  //     content: 'Test Post',
-  //     authorId: '1'
-  //   }
-  // })
   return (
     <main>
       <div className=''>
@@ -30,7 +24,7 @@ export default async function Home() {
             authorId={post.authorId}
             id={post.id}
             createdAt={post.createdAt}
-          // likes={post.likes}
+            likes={post.likes}
           />
         ))}
       </div>

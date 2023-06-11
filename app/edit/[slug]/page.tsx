@@ -70,7 +70,6 @@ export default async function Edit({
                                 autoComplete="off"
                             />
                         </div>
-                        {/* <Uploader /> */}
                     </div>
 
                     <div className="items-center bg-[#FEFEFE] border-t-2 border-[#353535] rounded-b-xl">

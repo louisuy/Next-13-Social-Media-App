@@ -2,16 +2,17 @@ import { clerkClient, currentUser } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import DeleteButton from "./DeleteButton";
+import LikeButton from "./LikeButton";
 
 type PostCardProps = {
     id: string;
     createdAt: Date;
     content: string;
     authorId: string;
-    // likes: number;
+    likes: number;
 }
 
-export async function PostCard({ content, authorId, id }: PostCardProps) {
+export async function PostCard({ content, authorId, id, likes }: PostCardProps) {
     const user = await clerkClient.users.getUser(authorId);
     const current = await currentUser();
     return (
@@ -45,10 +46,6 @@ export async function PostCard({ content, authorId, id }: PostCardProps) {
                         </div>
                     </div>
                     <div className="flex gap-4">
-                        <button className=''>
-                            &#129293;
-                        </button>
-                        {/* <p className="text-black">{likes}</p> */}
                         {current?.id === authorId && (
                             <>
                                 <Link href={`/edit/${id}`}>
@@ -59,6 +56,8 @@ export async function PostCard({ content, authorId, id }: PostCardProps) {
                                 <DeleteButton id={id} />
                             </>
                         )}
+                        <LikeButton id={id} />
+                        <p className="text-black">{likes}</p>
                     </div>
                 </div>
             </div>
