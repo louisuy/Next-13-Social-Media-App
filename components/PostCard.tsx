@@ -1,6 +1,7 @@
 import { clerkClient, currentUser } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
+import DeleteButton from "./DeleteButton";
 
 type PostCardProps = {
     id: string;
@@ -10,7 +11,7 @@ type PostCardProps = {
     // likes: number;
 }
 
-export async function PostCard({ content, authorId }: PostCardProps) {
+export async function PostCard({ content, authorId, id }: PostCardProps) {
     const user = await clerkClient.users.getUser(authorId);
     const current = await currentUser();
     return (
@@ -53,9 +54,7 @@ export async function PostCard({ content, authorId }: PostCardProps) {
                                 <button className=''>
                                     &#128221;
                                 </button>
-                                <button className=''>
-                                    &#128465;
-                                </button>
+                                <DeleteButton id={id} />
                             </>
                         )}
                     </div>
